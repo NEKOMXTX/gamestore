@@ -7,3 +7,5 @@ router.get('/', marketplaceController.getAll) // все магазины пол�
 // router.delete('/', marketplaceController.delete)
 
 module.exports = router
+
+//marketplace = brand
