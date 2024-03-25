@@ -1,11 +1,10 @@
 const Router = require('express')
 const router = new Router()
 const genreController = require('../controllers/genreController')
-const checkRoleMiddleware = require('../middleware/checkRoleMiddleware')
-const checkRole = checkRoleMiddleware
+const checkRole = require('../middleware/checkRoleMiddleware')
 
 router.post('/', checkRole('ADMIN'), genreController.create) //все магазины создавать 
-router.get('/', genreController.getAll) // все магазины получать
+router.get('/', checkRole('ADMIN') || checkRole('USER'), genreController.getAll) // все магазины получать
 // router.delete('/', genreController.deleteAll)
 
 module.exports = router
