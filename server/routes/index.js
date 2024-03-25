@@ -3,12 +3,12 @@ const router = new Router()
 const productRouter = require('./productRouter')
 const userRouter = require('./userRouter')
 const genreRouter = require('./genreRouter')
-const storeRouter = require('./storeRouter')
+const marketplaceRouter = require('./marketplaceRouter')
 
 
 router.use('/user', userRouter)
 router.use('/genre', genreRouter)
-router.use('/store', storeRouter)
+router.use('/marketplace', marketplaceRouter)
 router.use('/product', productRouter)
 
 module.exports = router

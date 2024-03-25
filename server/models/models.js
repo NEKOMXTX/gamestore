@@ -29,7 +29,7 @@ const Genre = sequelize.define('genre', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
 
-const Store = sequelize.define('store', {
+const Marketplace = sequelize.define('marketplace', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
@@ -45,7 +45,7 @@ const ProductInfo = sequelize.define('product_info', {
     description: {type: DataTypes.STRING, allowNull: false},
 })
 
-const GenreStore = sequelize.define('genre_store', {
+const GenreMarketplace = sequelize.define('genre_marketplace', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
@@ -63,8 +63,8 @@ BasketProduct.belongsTo(Basket)
 Genre.hasMany(Product)
 Product.belongsTo(Genre)
 
-Store.hasMany(Product)
-Product.belongsTo(Store)
+Marketplace.hasMany(Product)
+Product.belongsTo(Marketplace)
 
 Product.hasMany(Rating)
 Rating.belongsTo(Product)
@@ -77,8 +77,8 @@ ProductInfo.belongsTo(Product)
 
 //опишем вид связей между жанром и магазином
 
-Genre.belongsToMany(Store,{through: GenreStore})
-Store.belongsToMany(Genre, {through: GenreStore})
+Genre.belongsToMany(Marketplace,{through: GenreMarketplace})
+Marketplace.belongsToMany(Genre, {through: GenreMarketplace})
 
 module.exports = {
     User,
@@ -86,8 +86,8 @@ module.exports = {
     BasketProduct,
     Product,
     Genre,
-    Store,
+    Marketplace,
     Rating,
-    GenreStore,
+    GenreMarketplace,
     ProductInfo
 }
