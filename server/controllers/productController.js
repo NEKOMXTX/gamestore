@@ -7,7 +7,7 @@ const { json } = require('sequelize');
 class ProductController {
     async create(req, res, next) {
         try {
-            let {name, price, genreId, storeId, info} = req.body
+            let {name, price, genreId, marketplaceId, info} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName ))
@@ -23,7 +23,7 @@ class ProductController {
                 )
             }
 
-            const product = await Product.create({name, price, genreId, storeId, img: fileName})
+            const product = await Product.create({name, price, genreId, marketplaceId, img: fileName})
             
             return res.json(product)
         } catch (e) {
@@ -33,22 +33,22 @@ class ProductController {
     }
 
     async getAll(req, res) {
-        let {genreId, storeId, limit, page} = req.query
+        let {genreId, marketplaceId, limit, page} = req.query
         page = page || 1
         limit = limit || 9
         let offset = page * limit - limit // отступ (в 9 товаров)
         let products;
-        if (!genreId && !storeId) {
+        if (!genreId && !marketplaceId) {
             products = await Product.findAndCountAll({limit, offset})
         }
-        if (genreId && !storeId) {
+        if (genreId && !marketplaceId) {
             products = await Product.findAndCountAll({where: {genreId}, limit, offset})
         }
-        if (!genreId && storeId) {
-            products = await Product.findAndCountAll({where: {storeId}, limit, offset})
+        if (!genreId && marketplaceId) {
+            products = await Product.findAndCountAll({where: {marketplaceId}, limit, offset})
         }
-        if (genreId && storeId) {
-            products = await Product.findAndCountAll({where: {storeId, genreId},  limit, offset})
+        if (genreId && marketplaceId) {
+            products = await Product.findAndCountAll({where: {marketplaceId, genreId},  limit, offset})
         }
         return res.json(products)
     }
