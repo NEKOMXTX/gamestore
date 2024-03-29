@@ -4,7 +4,7 @@ const genreController = require('../controllers/genreController')
 const checkRole = require('../middleware/checkRoleMiddleware')
 
 router.post('/', checkRole('ADMIN'), genreController.create) //все магазины создавать 
-router.get('/', checkRole('ADMIN') || checkRole('USER'), genreController.getAll) // все магазины получать
+router.get('/', genreController.getAll) // все магазины получать
 // router.delete('/', genreController.deleteAll)
 
 module.exports = router
