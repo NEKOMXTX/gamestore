@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import UserStore from "./store/UserStore";
 
 import App from "./App";
+import ProductStore from "./store/ProductStore";
 
 export const Context = createContext(null)
 
@@ -13,9 +14,10 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <Context.Provider value={{
-        user: new UserStore()
+        user: new UserStore(),
+        product: new ProductStore(),
     }}>
         <App />
-    </Context.Provider>,
+    </Context.Provider>
   </StrictMode>
 );

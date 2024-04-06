@@ -20,17 +20,23 @@ export default class ProductStore {
         makeAutoObservable(this)
     }
 
-    setIsAuth(bool) {
-        this._isAuth = bool
+    setMarketplaces(marketplaces) {
+        this._marketplaces = marketplaces
     }
-    setUser(user) {
-        this._user = user
+    setGenres(genres) {
+        this._genres = genres
+    }
+    setProducts(prdoucts) {
+        this._products = prdoucts
     }
 
-    get isAuth() {
-        return this._isAuth
+    get marketplaces() {
+        return this._marketplaces
     }
-    get user() {
-        return this._user
+    get genres() {
+        return this._genres
+    }
+    get products() {
+        return this._products
     }
 }
