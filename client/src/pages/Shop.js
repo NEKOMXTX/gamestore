@@ -1,10 +1,21 @@
 import React from "react";
+import {Container, Row, Col} from "react-bootstrap";
+import GenreBar from "../components/GenreBar";
 
 const Shop = () => {
     return (
-        <div>
-            SHOP
-        </div>
+        <Container>
+            <Row>
+                <Col className="mt-3" md={3}>
+                    <GenreBar/>
+
+                </Col>
+                <Col md={9}>
+
+                </Col>
+
+            </Row>
+        </Container>
     );
 };
 

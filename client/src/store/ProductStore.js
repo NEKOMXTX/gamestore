@@ -5,6 +5,8 @@ export default class ProductStore {
         this._genres = [
             {id: 1, name: 'Кооператив'},
             {id: 2, name: 'Рог-лайк'},
+            {id: 3, name: 'Мультиплеер'},
+            {id: 4, name: 'Одиночная'},
         ]
         this._marketplaces = [
             {id: 1, name: 'Steam'},
