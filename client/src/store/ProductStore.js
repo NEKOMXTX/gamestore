@@ -23,19 +23,22 @@ export default class ProductStore {
         makeAutoObservable(this)
     }
 
-    setMarketplaces(marketplaces) {
-        this._marketplaces = marketplaces
-    }
     setGenres(genres) {
         this._genres = genres
     }
+
+    setMarketplaces(marketplaces) {
+        this._marketplaces = marketplaces
+    }
+    
     setProducts(prdoucts) {
         this._products = prdoucts
     }
 
-    setSelectedGenres(genre) {
+    setSelectedGenre(genre) {
         this._selectedGenre = genre
     }
+    
 
 
 
@@ -52,4 +55,5 @@ export default class ProductStore {
     get selectedGenre() {
         return this._selectedGenre
     }
+    
 }
