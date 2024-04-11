@@ -19,6 +19,7 @@ export default class ProductStore {
             {id: 4, name: 'Inkulinati', price: 1000, rating: 5, img: ''},
         
         ]
+        this._selectedGenre = {}
         makeAutoObservable(this)
     }
 
@@ -32,6 +33,12 @@ export default class ProductStore {
         this._products = prdoucts
     }
 
+    setSelectedGenres(genre) {
+        this._selectedGenre = genre
+    }
+
+
+
     get marketplaces() {
         return this._marketplaces
     }
@@ -40,5 +47,9 @@ export default class ProductStore {
     }
     get products() {
         return this._products
+    }
+
+    get selectedGenre() {
+        return this._selectedGenre
     }
 }
