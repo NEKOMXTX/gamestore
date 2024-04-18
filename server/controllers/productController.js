@@ -2,7 +2,6 @@ const uuid = require('uuid')
 const path = require('path');
 const {Product, ProductInfo} = require('../models/models')
 const ApiError = require('../error/ApiError');
-const { json } = require('sequelize');
 
 class ProductController {
     async create(req, res, next) {
