@@ -8,7 +8,7 @@ const GenreBar = observer(() => {
     const {product} = useContext(Context)
     return (
         <ListGroup>
-            {product.genres.map(genre =>
+            {product.genres.map(genre => //делается массив который впоследствии уже возвращается и рендерится
                 <ListGroup.Item
                     style={{cursor: 'pointer'}}
                     active={genre.id === product.selectedGenre.id} 

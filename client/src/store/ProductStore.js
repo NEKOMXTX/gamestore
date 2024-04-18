@@ -19,7 +19,11 @@ export default class ProductStore {
             {id: 4, name: 'Inkulinati', price: 1000, rating: 5, img: ''},
         
         ]
+        this._page = 1
+
         this._selectedGenre = {}
+        this._selectedMarketplace = {}
+
         makeAutoObservable(this)
     }
 
@@ -36,7 +40,17 @@ export default class ProductStore {
     }
 
     setSelectedGenre(genre) {
+        this.setPage(1)
         this._selectedGenre = genre
+    }
+
+    setSelectedMarketplace(marketplace) {
+        this.setPage(1)
+        this._selectedMarketplace = marketplace
+    }
+
+    setPage(page) {
+        this._page = page
     }
     
 
@@ -55,5 +69,14 @@ export default class ProductStore {
     get selectedGenre() {
         return this._selectedGenre
     }
+
+    get selectedMarketplace() {
+        return this._selectedMarketplace
+    }
+
+    get page() {
+        return this._page
+    }
+
     
 }
