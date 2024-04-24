@@ -11,12 +11,18 @@ export default class ProductStore {
         this._marketplaces = [
             {id: 1, name: 'Steam'},
             {id: 2, name: 'Epic Store'},
+            {id: 3, name: 'Ustore'},
+            {id: 4, name: 'Origin (EA)'},
+            {id: 5, name: 'Battle.net'},
         ]
         this._products = [
-            {id: 1, name: 'SQUAD', price: 10, rating: 5, img: ''},
-            {id: 2, name: 'Dead Cells', price: 600, rating: 5, img: ''},
-            {id: 3, name: 'PAYDAY 2', price: 150, rating: 5, img: ''},
-            {id: 4, name: 'Inkulinati', price: 1000, rating: 5, img: ''},
+            {id: 1, name: 'SQUAD', price: 10, rating: 5, img: 'https://placehold.co/400x300'},
+            {id: 2, name: 'Dead Cells', price: 600, rating: 5, img: 'https://placehold.co/400x300'},
+            {id: 3, name: 'PAYDAY 2', price: 150, rating: 5, img: 'https://placehold.co/400x300'},
+            {id: 4, name: 'Inkulinati', price: 1000, rating: 5, img: 'https://placehold.co/400x300'},
+            {id: 5, name: 'Inkulinati', price: 1000, rating: 5, img: 'https://placehold.co/400x300'},
+            {id: 6, name: 'Inkulinati', price: 1000, rating: 5, img: 'https://placehold.co/400x300'},
+            {id: 7, name: 'Inkulinati', price: 1000, rating: 5, img: 'https://placehold.co/400x300'},
         
         ]
         this._page = 1
