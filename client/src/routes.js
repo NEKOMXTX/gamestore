@@ -3,7 +3,7 @@ import Basket from "./pages/Basket";
 import Shop from "./pages/Shop";
 import Auth from "./pages/Auth";
 import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./utils/consts";
-import Product from "./pages/Product"
+import ProductPage from "./pages/ProductPage";
 
 export const authRoutes = [
     {
@@ -31,6 +31,6 @@ export const publicRoutes = [
     },
     {
         path: PRODUCT_ROUTE + '/:id',
-        Component: Product
+        Component: ProductPage
     },
 ]

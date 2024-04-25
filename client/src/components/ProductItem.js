@@ -1,16 +1,25 @@
 import React from 'react';
 import { Col, Card, Image } from 'react-bootstrap';
 import star from '../assets/star.svg'
+import {useHistory} from "react-router-dom"
+import { PRODUCT_ROUTE } from '../utils/consts';
+
 const ProductItem = ({product}) => {
+    const history = useHistory()
+    console.log(history)    
     return (
-        <Col md={3}>
+        <Col 
+        md={3} 
+        className={"mt-3"}
+        onClick={() => history.push(PRODUCT_ROUTE + '/' + product.id)}
+        >
             <Card 
             style={{width: 150, cursor: 'pointer'}} 
             border={"light"}
             className='mx-2'
             >
                 <Image width={150} height={150} src={product.img}/>
-                <div className='mt-1 d-flex justify-content-between align-items-center'>
+                <div className='mt-1 text-black-50 d-flex justify-content-between align-items-center'>
                     <div>
                         Steam
                     </div>

@@ -14,7 +14,7 @@ const MarketplaceBar = observer(() => {
                     key={marketplace.id}
                     className="p-3 me-3"
                     onClick={() => product.setSelectedMarketplace(marketplace)}
-                    border={marketplace.id === product.selectedMarketplace.id ? 'danger' : 'solid'}
+                    border={marketplace.id === product.selectedMarketplace.id ? 'danger' : 'light'}
                 >
                     {marketplace.name}
                 </Card>
