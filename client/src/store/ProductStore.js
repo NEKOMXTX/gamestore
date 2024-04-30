@@ -25,6 +25,8 @@ export default class ProductStore {
             {id: 7, name: 'Inkulinati', price: 1000, rating: 5, img: 'https://placehold.co/400x300'},
         
         ]
+
+        // this._keys
         this._page = 1
 
         this._selectedGenre = {}

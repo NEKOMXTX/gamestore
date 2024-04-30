@@ -11,13 +11,13 @@ const CreateMarketPlace = ({show, onHide}) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Добавить новый жанр
+          Добавить новый маркетплейс
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
             <Form.Control
-                placeholder={'Введите название жанра'}
+                placeholder={'Введите название маркетплейса'}
             />
         </Form>
        
