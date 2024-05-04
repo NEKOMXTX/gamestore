@@ -10,6 +10,7 @@ class ProductController {
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName ))
+            const product = await Product.create({name, price, genreId, marketplaceId, img: fileName})
             
             if (info) {
                 info = JSON.parse(info)
@@ -22,7 +23,7 @@ class ProductController {
                 )
             }
 
-            const product = await Product.create({name, price, genreId, marketplaceId, img: fileName})
+            
             
             return res.json(product)
         } catch (e) {
@@ -62,6 +63,38 @@ class ProductController {
         )
         return res.json(product)
     }
+
+    async addKeys(req, res, next) {
+        try {
+            const { productId, keys } = req.body;
+            const keysToCreate = keys.map(key => ({ productId, key }));
+            await ProductKeys.bulkCreate(keysToCreate);
+            res.json({ message: 'Keys added successfully' });
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+    
+    
+    async getKeys(req, res, next) {
+        try {
+            const { productId } = req.params;
+
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+    
+    async deleteKeys(req, res, next) {
+        try {
+            const { productId, keyId } = req.params;
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+    
 }
+
+
 
 module.exports = new ProductController() // через точку просто обрщаться к функциям и их вызывать
