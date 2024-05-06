@@ -11,16 +11,19 @@ const App = observer(() => {
   const {user} = useContext(Context)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() =>{
-      check().then(data => {
-        user.setUser(user)
-        user.setIsAuth(true)
-      }).finally(() => setLoading(false))
-}, [])
-
-  if (loading) {
-    return <Spinner animation={'grow'}/>
-  }
+  if(localStorage.getItem('token') !== null) {
+    const {user} = useContext(Context)
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        check().then(data => {
+            user.setIsAuth(true);
+            user.setUser(true)
+        }).finally(() => setLoading(false))
+    },)
+    if (loading) {
+        return <Spinner animation={"grow"}/>
+    }
+}
 
   return (
     <BrowserRouter>
