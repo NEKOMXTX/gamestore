@@ -5,12 +5,12 @@ export default class ProductStore {
         this._genres = []
         this._marketplaces = []
         this._products = []
-
         // this._keys
-        this._page = 1
-
         this._selectedGenre = {}
         this._selectedMarketplace = {}
+        this._page = 1
+        this._totalCount = 0
+        this._limit = 3
 
         makeAutoObservable(this)
     }
@@ -40,9 +40,11 @@ export default class ProductStore {
     setPage(page) {
         this._page = page
     }
+
+    setTotalCount(count) {
+        this._totalCount = count
+    }
     
-
-
 
     get marketplaces() {
         return this._marketplaces
@@ -62,8 +64,14 @@ export default class ProductStore {
         return this._selectedMarketplace
     }
 
+    get totalCount() {
+        return this._totalCount
+    }
     get page() {
         return this._page
+    }
+    get limit() {
+        return this._limit
     }
 
     

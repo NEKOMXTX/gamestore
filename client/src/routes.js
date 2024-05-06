@@ -5,11 +5,18 @@ import Auth from "./pages/Auth";
 import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./utils/consts";
 import ProductPage from "./pages/ProductPage";
 
-export const authRoutes = [
+export const authAdminRoutes = [
     {
         path: ADMIN_ROUTE,
         Component: Admin
     },
+    {
+        path: BASKET_ROUTE,
+        Component: Basket
+    },
+]
+
+export const authUserRoutes = [
     {
         path: BASKET_ROUTE,
         Component: Basket

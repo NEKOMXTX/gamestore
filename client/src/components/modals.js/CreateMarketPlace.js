@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { createMarketplace } from '../../http/productAPI';
 
 const CreateMarketPlace = ({show, onHide}) => {
-    return (
+  const [value, setValue] = useState('')
+  
+  const addMarketplace = () => {
+    createMarketplace({name: value}).then(data => {
+      setValue('')
+      onHide()
+    })
+  } 
+  
+  
+  
+  
+  return (
         <Modal
             show={show}
             onHide={onHide}
@@ -17,6 +30,8 @@ const CreateMarketPlace = ({show, onHide}) => {
       <Modal.Body>
         <Form>
             <Form.Control
+                value={value}
+                onChange={e => setValue(e.target.value)}
                 placeholder={'Введите название маркетплейса'}
             />
         </Form>
@@ -24,7 +39,7 @@ const CreateMarketPlace = ({show, onHide}) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant={'outline-danger'} onClick={onHide}>Закрыть</Button>
-        <Button variant={'outline-success'} onClick={onHide}>Добавить</Button>
+        <Button variant={'outline-success'} onClick={addMarketplace}>Добавить</Button>
       </Modal.Footer>
     </Modal>
     );

@@ -15,8 +15,12 @@ const NavBar = observer(() => {
     const history = useHistory()
 
     const logOut = () => {
+      localStorage.removeItem('token')
       user.setUser({})
       user.setIsAuth(false)
+      user.setIsAdmin(false)
+      history.push(LOGIN_ROUTE)
+
     }
 
     return (
@@ -24,22 +28,32 @@ const NavBar = observer(() => {
           <Container>
             <NavLink style={{color: 'white'}} to={SHOP_ROUTE}>Игрошоп</NavLink>
             {user.isAuth ?
-              <Nav className="ms-auto" style={{color: 'white'}}>
-                <Button 
-                  variant={"outline-light"} 
-                  onClick={() => history.push(ADMIN_ROUTE)}
-                >
-                  Админ панель
-                </Button>
-                <Button 
-                  variant={"outline-light"} 
-                  onClick={() => logOut()} 
-                  className="ms-2" 
-                >
-                  Выйти
-                </Button>
-              </Nav>
+              user.isAdmin ?
+                <Nav className="ms-auto" style={{color: 'white'}}>
+                  <Button 
+                    variant={"outline-light"} 
+                    onClick={() => history.push(ADMIN_ROUTE)}
+                  >
+                    Админ панель
+                  </Button>
+                  <Button 
+                    variant={"outline-light"} 
+                    onClick={() => logOut()} 
+                    className="ms-2" 
+                  >
+                    Выйти
+                  </Button>
+                </Nav>
               :
+                  <Button 
+                    variant={"outline-light"} 
+                    onClick={() => logOut()} 
+                    className="ms-2" 
+                  >
+                    Выйти
+                  </Button>
+                
+            :
               <Nav className="ms-auto" style={{color: 'white'}}>
                 <Button variant={"outline-light"} onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
               </Nav>

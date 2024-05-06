@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { createGenre } from '../../http/productAPI';
 
 const CreateGenre = ({show, onHide}) => {
-    return (
+  const [value, setValue] = useState('')
+  
+  const addGenre = () => {
+    createGenre({name: value}).then(data => {
+      setValue('')
+      onHide()
+    })
+  }
+  
+  return (
         <Modal
             show={show}
             onHide={onHide}
@@ -17,6 +27,8 @@ const CreateGenre = ({show, onHide}) => {
       <Modal.Body>
         <Form>
             <Form.Control
+                value={value}
+                onChange={e => setValue(e.target.value)}
                 placeholder={'Введите название жанра'}
             />
         </Form>
@@ -24,7 +36,7 @@ const CreateGenre = ({show, onHide}) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant={'outline-danger'} onClick={onHide}>Закрыть</Button>
-        <Button variant={'outline-success'} onClick={onHide}>Добавить</Button>
+        <Button variant={'outline-success'} onClick={addGenre}>Добавить</Button>
       </Modal.Footer>
     </Modal>
     );

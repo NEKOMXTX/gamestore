@@ -6,7 +6,6 @@ import { PRODUCT_ROUTE } from '../utils/consts';
 
 const ProductItem = ({product}) => {
     const history = useHistory()
-    console.log(history)    
     return (
         <Col 
         md={3} 
@@ -18,7 +17,7 @@ const ProductItem = ({product}) => {
             border={"light"}
             className='mx-2'
             >
-                <Image width={150} height={150} src={product.img}/>
+                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + product.img}/>
                 <div className='mt-1 text-black-50 d-flex justify-content-between align-items-center'>
                     <div>
                         Steam

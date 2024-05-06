@@ -49,7 +49,7 @@ const GenreMarketplace = sequelize.define('genre_marketplace', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-const ProductKeys = sequelize.define('product_keys', {
+const ProductKey = sequelize.define('product_key', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     key: {type: DataTypes.STRING, allowNull: false, unique: true},
 })
@@ -80,8 +80,8 @@ BasketProduct.belongsTo(Product)
 Product.hasMany(ProductInfo, {as: 'info'});
 ProductInfo.belongsTo(Product)
 
-Product.hasMany(ProductKeys, {as: 'keys'});
-ProductKeys.belongsTo(Product)
+Product.hasMany(ProductKey, {as: 'key'});
+ProductKey.belongsTo(Product)
 
 //опишем вид связей между жанром и магазином
 
@@ -98,5 +98,5 @@ module.exports = {
     Rating,
     GenreMarketplace,
     ProductInfo,
-    ProductKeys
+    ProductKey
 }

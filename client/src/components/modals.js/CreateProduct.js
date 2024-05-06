@@ -1,16 +1,45 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Modal, Button, Form, Dropdown, Row, Col } from 'react-bootstrap';
-import { Context } from '../..';
+import {Context} from "../../index";
+import { fetchGenres, fetchMarketplaces, createProduct, fetchProducts } from "../../http/productAPI";
+import {observer} from "mobx-react-lite";
 
-const CreateProduct = ({show, onHide}) => {
+const CreateProduct = observer(({show, onHide}) => {
   const {product} = useContext(Context)
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState(0)
+  const [file, setFile] = useState(null)
   const [info, setInfo] = useState([])
+  
+  useEffect(() => {
+    fetchGenres().then(data => product.setGenres(data))
+    fetchMarketplaces().then(data => product.setMarketplaces(data))
+}, [])
   
   const addInfo = () => {
     setInfo([...info, {title: '', description: '', number: Date.now()}])
   }
   const removeInfo = (number) => {
     setInfo(info.filter(i => i.number !== number))
+  }
+  const changeInfo = (key, value, number) => [
+    setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+  ]
+
+  const selectFile = e => {
+    setFile(e.target.files[0])
+  }
+
+  const addProduct = () => {
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('price', `${price}`)
+    formData.append('img', file)
+    formData.append('genreId', product.selectedGenre.id)
+    formData.append('marketplaceId', product.selectedMarketplace.id)
+    formData.append('info', JSON.stringify(info))
+
+    createProduct(formData).then(data => onHide())
   }
 
   return (
@@ -28,24 +57,38 @@ const CreateProduct = ({show, onHide}) => {
       <Modal.Body>
         <Form>
             <Dropdown className="mt-2 mb-2">
-              <Dropdown.Toggle>Выберите жанр</Dropdown.Toggle>
+              <Dropdown.Toggle>{product.selectedGenre.name || "Выберите жанр"}</Dropdown.Toggle>
               <Dropdown.Menu>
               {product.genres.map(genre =>
-                <Dropdown.Item key={genre.id}>{genre.name}</Dropdown.Item>)}                
+                <Dropdown.Item 
+                      onClick={() => product.setSelectedGenre(genre)} 
+                      key={genre.id}
+                >
+                      {genre.name}
+                </Dropdown.Item>)}                
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="mt-2 mb-2">
-              <Dropdown.Toggle>Выберите маркетплейс</Dropdown.Toggle>
+              <Dropdown.Toggle>{product.selectedMarketplace.name || "Выберите маркетплейс"}</Dropdown.Toggle>
               <Dropdown.Menu>
               {product.marketplaces.map(marketplace =>
-                <Dropdown.Item key={marketplace.id}>{marketplace.name}</Dropdown.Item>)}                
+                <Dropdown.Item 
+                      onClick={() => product.setSelectedMarketplace(marketplace)} 
+                      key={marketplace.id}
+                >
+                      {marketplace.name}
+                </Dropdown.Item>)}                
               </Dropdown.Menu>
             </Dropdown>
             <Form.Control
+              value={name}
+              onChange={e => setName(e.target.value)}              
               className='mt-3'
               placeholder='Введите название игры'
             />
             <Form.Control
+              value={price}
+              onChange={e => setPrice(Number(e.target.value))}              
               className='mt-3'
               placeholder='Введите стоимость игры'
               type='number'
@@ -54,6 +97,7 @@ const CreateProduct = ({show, onHide}) => {
             <Form.Control
               className='mt-3'
               type='file'
+              onChange={selectFile}
 
             />
             <hr/>
@@ -69,11 +113,15 @@ const CreateProduct = ({show, onHide}) => {
               <Row className='mt-4' key={i.number}>
                 <Col md={4}>
                   <Form.Control
+                    value={i.title}
+                    onChange={(e) => changeInfo('title', e.target.value, i.number)}
                     placeholder='Введите название описания'
                   />
                 </Col>
                 <Col md={4}>
                   <Form.Control
+                    value={i.description}
+                    onChange={(e) => changeInfo('description', e.target.value, i.number)}
                     placeholder='Введите описание'
                   />
                 </Col>
@@ -88,10 +136,10 @@ const CreateProduct = ({show, onHide}) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant={'outline-danger'} onClick={onHide}>Закрыть</Button>
-        <Button variant={'outline-success'} onClick={onHide}>Добавить</Button>
+        <Button variant={'outline-success'} onClick={addProduct}>Добавить</Button>
       </Modal.Footer>
     </Modal>
     );
-};
+});
 
 export default CreateProduct;

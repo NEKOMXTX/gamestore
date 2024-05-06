@@ -27,6 +27,9 @@ const Auth = observer(() => {
             user.setUser(user)
             user.setIsAuth(true)
             history.push(SHOP_ROUTE)
+            if (email === "testuser@gmail.com"){
+                user.setIsAdmin(true)
+            }
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -51,7 +54,7 @@ const Auth = observer(() => {
                     <Form.Group className="mt-3" controlId="formBasicPassword">
                         <Form.Control type="password" placeholder="Введите ваш пароль..." 
                             value={password}
-                            onChange={p => setPassword(p.target.value)}
+                            onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
 
